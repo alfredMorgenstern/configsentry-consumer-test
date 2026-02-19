@@ -1,0 +1,18 @@
+name: ConfigSentry consumer test
+on: [push]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  configsentry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: alfredMorgenstern/configsentry@v0.0.16
+        with:
+          target: ./docker-compose.yml
+          sarif: true
+          upload-sarif: true
+          fail-on-findings: false
